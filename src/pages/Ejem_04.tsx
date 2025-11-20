@@ -4,7 +4,7 @@ interface Props {
 }
 
 function MiComponente({color, size}: Props) {
-    return <div>Soy un componente de color {color}</div>
+    return <div>Soy un componente de color {color} de tamaño {size}</div>
 }
 
 export default function Ejem_04() {

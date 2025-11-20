@@ -9,9 +9,7 @@ import { Suspense } from "react";
 function App() {
   return (
 
-    <BrowserRouter
-      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-    >
+    <BrowserRouter>
       <Suspense fallback={<div>Cargando...</div>}>
         <Routes>
           <Route path="/" element={<Layout />}>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 export const routes = [
   {
@@ -66,6 +66,67 @@ export const routes = [
     title: "",
     description: "",
     component: React.lazy(() => import("../pages/Ejem_10")),
+  },
+  {
+    to: "Ejercicio01",
+    title: "Mostrar valor en grados y centigrados",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejercicio_01")),
+  },
+
+  {
+    to: "Ejercicio02",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejercicio_02")),
+  },
+  {
+    to: "Ejercicio03",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejercicio_03")),
+  },
+  {
+    to: "Ejercicio04",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejercicio_04")),
+  },
+  {
+    to: "Ejercicio05",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejercicio_05")),
+  },
+  {
+    to: "Ejercicio06",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejercicio_06")),
+  },
+  {
+    to: "Ejercicio07",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejercicio_07")),
+  },
+  {
+    to: "Ejercicio08",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejercicio_08")),
+  },
+  {
+    to: "Ejercicio09",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejercicio_09")),
+  },
+  {
+    to: "Ejercicio10",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejercicio_10")),
   },
 
 ];
