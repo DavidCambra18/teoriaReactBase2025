@@ -68,6 +68,42 @@ export const routes = [
     component: React.lazy(() => import("../pages/Ejem_10")),
   },
   {
+    to: "Ejem11",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejem_11")),
+  },
+  {
+    to: "Ejem12",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejem_12")),
+  },
+  {
+    to: "Ejem13",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejem_13")),
+  },
+  {
+    to: "Ejem14",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejem_14")),
+  },
+  {
+    to: "Ejem15",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejem_15")),
+  },
+  {
+    to: "Ejem16",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejem_16")),
+  },
+  {
     to: "Ejercicio01",
     title: "Mostrar valor en grados y centigrados",
     description: "",

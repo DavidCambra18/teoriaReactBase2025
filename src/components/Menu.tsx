@@ -15,6 +15,11 @@ export default function Menu() {
                 <Link to="/Ejem9">Ejem09</Link>
                 <Link to="/Ejem10">Ejem10</Link>
                 <Link to="/Ejem11">Ejem11</Link>
+                <Link to="/Ejem12">Ejem12</Link>
+                <Link to="/Ejem13">Ejem13</Link>
+                <Link to="/Ejem14">Ejem14</Link>
+                <Link to="/Ejem15">Ejem15</Link>
+                <Link to="/Ejem16">Ejem16</Link>
                 <Link to="/Ejercicio01">Ejercicio01</Link>
                 <Link to="/Ejercicio02">Ejercicio02</Link>
                 <Link to="/Ejercicio03">Ejercicio03</Link>
