@@ -104,6 +104,12 @@ export const routes = [
     component: React.lazy(() => import("../pages/Ejem_16")),
   },
   {
+    to: "Ejem17",
+    title: "",
+    description: "",
+    component: React.lazy(() => import("../pages/Ejem_17")),
+  },
+  {
     to: "Ejercicio01",
     title: "Mostrar valor en grados y centigrados",
     description: "",
