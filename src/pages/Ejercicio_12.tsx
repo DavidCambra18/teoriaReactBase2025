@@ -7,79 +7,69 @@ Si pago el magosto ponerle algun simbolo
 
 import { useState, type ChangeEvent, type FormEvent } from "react"
 
-interface Person {
-    id: number
+type Person = {
+    id: number,
     name: string,
-    paid: boolean
+    hasPaid: boolean
 }
 
 const initialPeople: Person[] = [
-    { id: 1, name: "Ana", paid: true },
-    { id: 2, name: "Brais", paid: false },
-    { id: 3, name: "Carlos", paid: true },
-];
+    { id: 1, name: 'Jose', hasPaid: false },
+    { id: 2, name: 'Ana', hasPaid: true },
+    { id: 4, name: 'Paula', hasPaid: false },
+    { id: 5, name: 'Juan', hasPaid: true },
+    
+]
 
-export default function Ejercicio_12() {
-
-    const [newName, setNewName] = useState<string>('')
-    const [people, setPeople] = useState<Person[]>(initialPeople);
-    const [nextId, setNextId] = useState<number>(initialPeople.reduce((max, p) => (p.id > max ? p.id : max), 0) + 1)
-
+export default function Ejercicio_11() {
+    const [people, setPeople] = useState(initialPeople)
+    const [form, setForm] = useState(
+        {
+            name: '',
+        }
+    )
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
-        setNewName(event.target.value)
-
+        const { value, name } = event.target
+        setForm({ ...form, [name]: value })
     }
-
     function handleSubmit(event: FormEvent) {
         event.preventDefault()
-
-        const trimmedName = newName.trim()
-
-        if (trimmedName) {
-            const newPerson: Person = {
-                id: nextId,
-                name: trimmedName,
-                paid: false,
-            };
-
-            setPeople([...people, newPerson]);
-            setNextId(nextId + 1);
-            setNewName('');
-        }
+        if(!form.name) return
+        setPeople( [...people , {id:Date.now(), name:form.name, hasPaid:false}] )
     }
-
-    function handleDelete(id: number) {
-        setPeople(people.filter(p => p.id !== id));
+    function handleDelete(id:number){
+        const result = window.confirm('Estás seguro que quieres borrar?')
+        if(!result) return
+        setPeople(  people.filter(person=>person.id != id)  )
     }
-
-    function handleTogglePaid(id: number) {
-        setPeople(
-            people.map(p =>
-                p.id === id ? { ...p, paid: !p.paid } : p
-            )
-        );
+    function handleTogglePay(id: number){
+        const newPeople = people.map(person => 
+            person.id === id ? {...person, hasPaid:!person.hasPaid} : person)
+        setPeople(newPeople)
     }
 
     return <div>
-        <p>Añadir nombres nuevos</p>
-        <br />
-        <form>
-            <div>
-                <label>
-                    <span>Nombre: </span>
-                    <input name="name" value={newName} onChange={handleChange} />
-                </label>
-            </div>
-            <button style={{ marginTop: "10px", fontSize: "14px" }} onClick={handleSubmit}>Añadir</button>
+        <h1>Lista de pagos del Magosto</h1>
+        {/* formulario */}
+        <form onSubmit={handleSubmit} className="flex gap-2 mb-6 mt-6">
+            <label className="flex flex-row gap-4">
+                Nombre: 
+                <input className="p-1 border rounded-xl" placeholder="Nuevo nombre..." name="name" value={form.name} onChange={handleChange} />
+            </label>
+            <button className="p-1 border rounded-xl hover:bg-gray-700">Añadir</button>
         </form>
-        <br />
-        <div>
-            <span>Lista de nombres: </span>
-            <ul>
-                <li key={people.id}>{people.name}</li>
-            </ul>
-        </div>
+        {/* lista */}
+        <ul>
+            {people.map( person => (
+                <li className="" key={person.id}> 
+                <span>{person.hasPaid?'✔':'💩'}</span>
+                <span style={{color: person.hasPaid?'green':'orange'}}>{person.name} </span>
+                <button className="text-red-600 border rounded-3xl ml-3 mr-2 mt-1.5" onClick={()=>handleDelete(person.id)}>X</button>
+                <button onClick={()=>handleTogglePay(person.id)}>{person.hasPaid ? 'Ha pagado': 'No ha pagado'}</button>
+                </li>
+            ))}
+        </ul>
 
     </div>
 }
