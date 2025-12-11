@@ -1,37 +1,98 @@
-import { Link } from "react-router-dom"
+import { useState } from 'react';
+import { NavLink } from "react-router-dom";
+import "./Menu.css";
+import { useUser } from '../hooks/useUser';
+
+interface MenuItem {
+    path: string;
+    label: string;
+}
 
 export default function Menu() {
+    const {currentUser} = useUser();
+    const [showEjemplos, setShowEjemplos] = useState(false);
+    const [showEjercicios, setShowEjercicios] = useState(false);
+
+    const ejemplos: MenuItem[] = Array.from({ length: 30 }, (_, i) => ({
+        path: `/Ejem${i + 1}`,
+        label: `Ejemplo ${String(i + 1).padStart(2, '0')}`
+    }));
+
+    const ejercicios: MenuItem[] = Array.from({ length: 30 }, (_, i) => ({
+        path: `/Ejercicio${i + 1}`,
+        label: `Ejercicio ${String(i + 1).padStart(2, '0')}`
+    }));
+
+    const ArrowIcon = ({ isOpen }: { isOpen: boolean }) => (
+        <svg 
+            className={`arrow-icon ${isOpen ? 'rotate' : ''}`} 
+            width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+        >
+            <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+    );
+
     return (
-        <nav>
-            <ul>
-                <Link to="/Ejem1">Ejem01</Link>
-                <Link to="/Ejem2">Ejem02</Link>
-                <Link to="/Ejem3">Ejem03</Link>
-                <Link to="/Ejem4">Ejem04</Link>
-                <Link to="/Ejem5">Ejem05</Link>
-                <Link to="/Ejem6">Ejem06</Link>
-                <Link to="/Ejem7">Ejem07</Link>
-                <Link to="/Ejem8">Ejem08</Link>
-                <Link to="/Ejem9">Ejem09</Link>
-                <Link to="/Ejem10">Ejem10</Link>
-                <Link to="/Ejem11">Ejem11</Link>
-                <Link to="/Ejem12">Ejem12</Link>
-                <Link to="/Ejem13">Ejem13</Link>
-                <Link to="/Ejem14">Ejem14</Link>
-                <Link to="/Ejem15">Ejem15</Link>
-                <Link to="/Ejem16">Ejem16</Link>
-                <Link to="/Ejem17">Ejem17</Link>
-                <Link to="/Ejercicio01">Ejercicio01</Link>
-                <Link to="/Ejercicio02">Ejercicio02</Link>
-                <Link to="/Ejercicio03">Ejercicio03</Link>
-                <Link to="/Ejercicio04">Ejercicio04</Link>
-                <Link to="/Ejercicio05">Ejercicio05</Link>
-                <Link to="/Ejercicio06">Ejercicio06</Link>
-                <Link to="/Ejercicio07">Ejercicio07</Link>
-                <Link to="/Ejercicio08">Ejercicio08</Link>
-                <Link to="/Ejercicio09">Ejercicio09</Link>
-                <Link to="/Ejercicio10">Ejercicio10</Link>
-            </ul>
-        </nav>
-    )
+        <header className="sidebar">
+
+            <nav className="sidebar-nav">
+                <div style={{marginTop: "7px", marginBottom: "7px"}}>{currentUser ? currentUser?.name:'No estas logueado'}</div>
+                
+                {/* --- SECCIÓN 1: EJEMPLOS (DROPDOWN) --- */}
+                <div className="menu-group">
+                    <button 
+                        className={`dropdown-btn ${showEjemplos ? 'active' : ''}`} 
+                        onClick={() => setShowEjemplos(!showEjemplos)}
+                    >
+                        <span>📂 Ejemplos</span>
+                        <ArrowIcon isOpen={showEjemplos} />
+                    </button>
+
+                    {/* Lista desplegable */}
+                    <div className={`submenu ${showEjemplos ? 'open' : ''}`}>
+                        <ul>
+                            {ejemplos.map((item) => (
+                                <li key={item.path}>
+                                    <NavLink 
+                                        to={item.path}
+                                        className={({ isActive }) => isActive ? "sub-link active" : "sub-link"}
+                                    >
+                                        {item.label}
+                                    </NavLink>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                {/* --- SECCIÓN 2: EJERCICIOS (DROPDOWN) --- */}
+                <div className="menu-group">
+                    <button 
+                        className={`dropdown-btn ${showEjercicios ? 'active' : ''}`} 
+                        onClick={() => setShowEjercicios(!showEjercicios)}
+                    >
+                        <span>🚀 Ejercicios</span>
+                        <ArrowIcon isOpen={showEjercicios} />
+                    </button>
+
+                    {/* Lista desplegable */}
+                    <div className={`submenu ${showEjercicios ? 'open' : ''}`}>
+                        <ul>
+                            {ejercicios.map((item) => (
+                                <li key={item.path}>
+                                    <NavLink 
+                                        to={item.path}
+                                        className={({ isActive }) => isActive ? "sub-link active" : "sub-link"}
+                                    >
+                                        {item.label}
+                                    </NavLink>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+            </nav>
+        </header>
+    );
 }

@@ -5,25 +5,28 @@ import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import { routes } from "./routes/routesConfig";
 import { Suspense } from "react";
+import { UserProvider } from "./context/UserProvider";
 
 function App() {
   return (
 
     <BrowserRouter>
-      <Suspense fallback={<div>Cargando...</div>}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            {routes
-              .filter(({ to }) => to !== null)
-              .map(({ to, component: Component }) => (
-                <Route key={to} path={to || ""} element={<Component />} />
-              ))}
-
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </Suspense>
+      <UserProvider>
+        <Suspense fallback={<div>Cargando...</div>}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              {routes
+                .filter(({ to }) => to !== null)
+                .map(({ to, component: Component }) => (
+                  <Route key={to} path={to || ""} element={<Component />} />
+                ))}
+              <Route path="*" element={<NotFound />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </UserProvider>
     </BrowserRouter>
   );
 }

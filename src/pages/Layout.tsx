@@ -3,10 +3,11 @@ import Menu from "../components/Menu"
 
 export default function Layout() {
     return (
-        <main>
+        <main style={{ display: 'flex', height: '100vh' }}>
             <Menu />
-            <Outlet />
-            <div>footer</div>
+            <div style={{ flex: 1, overflowY: 'auto', marginLeft: '280px' }}>
+                <Outlet />
+            </div>
         </main>
     )
 }
